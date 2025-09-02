@@ -275,6 +275,59 @@
             .navigation { display: none; }
             .welcome-sign { padding: 20px; }
         }
+        .gallery-scroll {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .answer-frame {
+            position: relative;
+            margin-bottom: 80px;
+            display: flex;
+            justify-content: center;
+            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.2));
+            transition: transform 0.3s ease;
+        }
+        
+        .answer-frame:hover {
+            transform: translateY(-5px);
+        }
+        
+        .answer-frame-img {
+            max-width: 800px;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .answer-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65%;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .answer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+        }
+        
+        .answer-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2c1810;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+            text-align: justify;
+        }
     </style>
 </head>
 <body>
@@ -292,47 +345,28 @@
             <button class="enter-button" onclick="nextRoom()">Enter the Gallery</button>
         </div>
         
-        <!-- Portrait Gallery -->
-        <div class="room" id="portraits">
-            <div class="room-header">
-                <h1 class="room-title">Sala dei Ritratti</h1>
-                <p class="room-subtitle">Portrait Gallery - The Heart of Character</p>
-            </div>
-            
-            <div class="artwork-grid">
-                <div class="artwork">
-                    <div class="artwork-content">
-                        <h2 class="artwork-title">Why Texas Bluebonnets?</h2>
-                        <p class="artwork-text">
+        <!-- Gallery Main View -->
+        <div class="room" id="gallery-main">
+            <div class="gallery-scroll">
+                <!-- Frame 1: Why Texas Bluebonnets -->
+                <div class="answer-frame">
+                    <img src="frame2.png" alt="Ornate Frame" class="answer-frame-img">
+                    <div class="answer-overlay">
+                        <h2 class="answer-title">Why do you want to join Texas Bluebonnets?</h2>
+                        <p class="answer-text">
                             I want to find my family! As a CS major, I am around mostly men, and I experienced what I think is extreme imposter syndrome during my freshman year. A lot of times, I felt like I was more in competition with people I met than making meaningful connections, so I am seeking a genuine community where I can be unapologetically myself :)
                         </p>
-                        <div class="placard">
-                            "The Search for Authentic Connection" - Mixed media on hope, 2024
-                        </div>
                     </div>
                 </div>
-                
-                <div class="artwork">
-                    <div class="artwork-content">
-                        <h2 class="artwork-title">My Favorite Thing About Myself</h2>
-                        <p class="artwork-text">
-                            I am a very decisive person. I will always know where I want to eat, when I am free and not, and you best believe I will never be late or break my promises.
+
+                <!-- Frame 2: Core Pillar -->
+                <div class="answer-frame">
+                    <img src="frame2.png" alt="Ornate Frame" class="answer-frame-img">
+                    <div class="answer-overlay">
+                        <h2 class="answer-title">How do you embody Service?</h2>
+                        <p class="answer-text">
+                            I value service a lot! I have a local Vietnamese temple near my family home that feeds anyone that joins on Sundays. During my summers, I go to temple every Sunday morning to help out with food preparation, cleaning, and plant care for the nuns that live there. I go with my mom and my sister, so it is not only a way to bond with my family, but also a time completely away from screens and focused on giving back.
                         </p>
-                        <div class="placard">
-                            "Portrait of Reliability" - Oil on determination, 2024
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="artwork">
-                    <div class="artwork-content">
-                        <h2 class="artwork-title">Most Likely To...</h2>
-                        <p class="artwork-text">
-                            I am most likely to cry at any extreme situation (extremely happy, extremely sad, extremely tired, extremely angry, etc.)
-                        </p>
-                        <div class="placard">
-                            "The Spectrum of Emotion" - Watercolor on vulnerability, 2024
-                        </div>
                     </div>
                 </div>
             </div>
@@ -461,7 +495,7 @@
             <div class="nav-tooltip">Entrance</div>
         </div>
         <div class="nav-dot" onclick="showRoom(1)">
-            <div class="nav-tooltip">Portraits</div>
+            <div class="nav-tooltip">Gallery</div>
         </div>
         <div class="nav-dot" onclick="showRoom(2)">
             <div class="nav-tooltip">Service</div>
@@ -489,6 +523,9 @@
             setTimeout(() => {
                 rooms[currentRoom].classList.add('active');
                 navDots[currentRoom].classList.add('active');
+                
+                // Scroll to top when changing rooms
+                window.scrollTo(0, 0);
             }, 200);
         }
         
