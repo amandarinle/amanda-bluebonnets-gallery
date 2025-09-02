@@ -326,6 +326,10 @@
             z-index: 10;
         }
 
+        .frame-sticker:hover {
+            transform: scale(1.1);
+        }
+
         .sticker-top-center {
             top: -60px;
             left: 50%;
@@ -351,13 +355,9 @@
         }
 
         .sticker-right-corner {
-            right: -30px;
+            right: -10px;
             bottom: -30px;
             rotate: 15deg;
-        }
-
-        .frame-sticker:hover {
-            transform: scale(1.1);
         }
 
         /* Sparkles for stickers */
@@ -672,14 +672,12 @@
             const sparkleEmojis = ['✨', '💫', '⭐'];
             const sticker = event.currentTarget;
             
-            // Create 3-5 small sparkles around the sticker
             for (let i = 0; i < Math.random() * 3 + 3; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sticker-sparkle';
                 sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
                 
-                // Position sparkles randomly around the sticker
-                const x = Math.random() * 60 - 30; // -30 to 30px from center
+                const x = Math.random() * 60 - 30;
                 const y = Math.random() * 60 - 30;
                 
                 sparkle.style.left = '50%';
@@ -688,7 +686,6 @@
                 
                 sticker.appendChild(sparkle);
                 
-                // Remove sparkle after animation
                 setTimeout(() => {
                     if (sparkle.parentNode) {
                         sparkle.parentNode.removeChild(sparkle);
@@ -697,7 +694,6 @@
             }
         }
 
-        // Add hover listeners to all stickers when page loads
         document.addEventListener('DOMContentLoaded', function() {
             const stickers = document.querySelectorAll('.frame-sticker');
             stickers.forEach(sticker => {
