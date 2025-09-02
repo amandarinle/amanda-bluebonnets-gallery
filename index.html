@@ -310,7 +310,7 @@
             transform: translate(-50%, -50%);
             width: 50%;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
         }
         
         .answer-title {
@@ -324,11 +324,107 @@
         
         .answer-text {
             font-family: 'Crimson Text', serif;
-            font-size: 0.75rem;  
+            font-size: 1.0rem;  
             line-height: 1.4;    
             color: #2c1810;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
             text-align: justify;
+        }
+
+        .frame-sticker {
+            position: absolute;
+            max-width: 80px;
+            max-height: 80px;
+            width: auto;
+            height: auto;
+            opacity: 0.8;
+            transition: transform 0.3s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .frame-sticker:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .sticker-top-left {
+            top: -20px;
+            left: 50px;
+            animation-delay: 0s;
+        }
+
+        .sticker-top-right {
+            top: 30px;
+            right: 40px;
+            animation-delay: 2s;
+        }
+
+        .sticker-bottom-left {
+            bottom: 20px;
+            left: 80px;
+            animation-delay: 4s;
+        }
+
+        .sticker-bottom-right {
+            bottom: -10px;
+            right: 70px;
+            animation-delay: 6s;
+        }
+
+        .speech-bubble {
+            position: absolute;
+            top: -30px;
+            left: -50px;
+            max-width: 120px;
+            cursor: pointer;
+            z-index: 20;
+            transition: transform 0.3s ease;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .speech-bubble:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Hidden stickers that will animate in */
+        .hidden-sticker {
+            position: absolute;
+            max-width: 60px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 15;
+        }
+
+        .sticker-left {
+            top: 100px;
+            left: -80px;
+        }
+
+        .sticker-right {
+            top: 120px;
+            right: -80px;
+        }
+
+        /* Animation classes */
+        .hidden-sticker.animate-in {
+            opacity: 1;
+            transform: scale(1) rotate(360deg);
+        }
+
+        .frame-clicked {
+            animation: frameShake 0.6s ease-in-out;
+        }
+
+        @keyframes frameShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px) rotate(-1deg); }
+            75% { transform: translateX(5px) rotate(1deg); }
         }
     </style>
 </head>
@@ -359,6 +455,12 @@
                             I want to find my family! As a CS major, I am around mostly men, and I experienced what I think is extreme imposter syndrome during my freshman year. A lot of times, I felt like I was more in competition with people I met than making meaningful connections, so I am seeking a genuine community where I can be unapologetically myself :)
                         </p>
                     </div>
+                    <!-- Speech bubble -->
+                    <img src="speech-bubble.png" alt="Click me!" class="speech-bubble">
+                    
+                    <!-- Hidden stickers that will animate in -->
+                    <img src="sticker1.png" alt="Sticker" class="hidden-sticker sticker-left" id="sticker-left">
+                    <img src="sticker2.png" alt="Sticker" class="hidden-sticker sticker-right" id="sticker-right">
                 </div>
 
                 <!-- Frame 2: Core Pillar -->
@@ -586,6 +688,35 @@
                 }
             }
         });
+
+        function triggerStickers() {
+            const frame = document.getElementById('first-frame');
+            const leftSticker = document.getElementById('sticker-left');
+            const rightSticker = document.getElementById('sticker-right');
+            
+            // Add shake animation to frame
+            frame.classList.add('frame-clicked');
+            
+            // Remove shake class after animation
+            setTimeout(() => {
+                frame.classList.remove('frame-clicked');
+            }, 600);
+            
+            // Animate stickers in with delay
+            setTimeout(() => {
+                leftSticker.classList.add('animate-in');
+            }, 200);
+            
+            setTimeout(() => {
+                rightSticker.classList.add('animate-in');
+            }, 400);
+            
+            // Hide stickers after 3 seconds
+            setTimeout(() => {
+                leftSticker.classList.remove('animate-in');
+                rightSticker.classList.remove('animate-in');
+            }, 3000);
+        }
     </script>
 </body>
 </html>
