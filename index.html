@@ -355,7 +355,7 @@
         }
 
         .sticker-right-corner {
-            right: -10px;
+            right: 15px;
             bottom: -30px;
             rotate: 15deg;
         }
@@ -363,24 +363,25 @@
         /* Sparkles for stickers */
         .sticker-sparkle {
             position: absolute;
-            font-size: 1rem;
+            font-size: 1.2rem;
             opacity: 0;
             pointer-events: none;
-            animation: stickerSparkleFloat 1.5s ease-out forwards;
+            animation: stickerSparkleFloat 1.8s ease-out forwards;
+            z-index: 100;
         }
 
         @keyframes stickerSparkleFloat {
             0% {
                 opacity: 1;
-                transform: scale(0.3) rotate(0deg);
+                transform: scale(0.5) rotate(0deg);
             }
             50% {
-                opacity: 0.9;
-                transform: scale(1) rotate(180deg);
+                opacity: 0.8;
+                transform: scale(1.1) rotate(180deg);
             }
             100% {
                 opacity: 0;
-                transform: scale(0.5) rotate(360deg) translateY(-30px);
+                transform: scale(0.7) rotate(360deg) translateY(-40px);
             }
         }
 
@@ -435,8 +436,8 @@
                             I want to find my family! As a CS major, I am around mostly men, and I experienced what I think is extreme imposter syndrome during my freshman year. A lot of times, I felt like I was more in competition with people I met than making meaningful connections, so I am seeking a genuine community where I can be unapologetically myself :)
                         </p>
                     </div>
-                    <img src="sticker1.png" alt="Decorative sticker" class="frame-sticker sticker-left-center">
-                    <img src="sticker2.png" alt="Decorative sticker" class="frame-sticker sticker-right-center">
+                    <img src="sticker1.png" alt="Decorative sticker" class="frame-sticker sticker-left-center" onclick="createStickerSparkles(event)">
+                    <img src="sticker2.png" alt="Decorative sticker" class="frame-sticker sticker-right-center" onclick="createStickerSparkles(event)">
                 </div>
 
                 <!-- Frame 2: Core Pillar -->
@@ -448,7 +449,7 @@
                             I value service a lot! I have a local Vietnamese temple near my family home that feeds anyone that joins on Sundays. During my summers, I go to temple every Sunday morning to help out with food preparation, cleaning, and plant care for the nuns that live there. I go with my mom and my sister, so it is not only a way to bond with my family, but also a time completely away from screens and focused on giving back.
                         </p>
                     </div>
-                    <img src="sticker3.png" alt="Decorative sticker" class="frame-sticker sticker-right-corner">
+                    <img src="sticker3.png" alt="Decorative sticker" class="frame-sticker sticker-right-corner" onclick="createStickerSparkles(event)">
                 </div>
             </div>
         </div>
@@ -669,37 +670,34 @@
         }
 
         function createStickerSparkles(event) {
-            const sparkleEmojis = ['✨', '💫', '⭐'];
+            const sparkleEmojis = ['✨', '💫', '⭐', '🌟'];
             const sticker = event.currentTarget;
             
-            for (let i = 0; i < Math.random() * 3 + 3; i++) {
+            // Create 4-6 sparkles around the clicked sticker
+            for (let i = 0; i < Math.random() * 3 + 4; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sticker-sparkle';
                 sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
                 
-                const x = Math.random() * 60 - 30;
-                const y = Math.random() * 60 - 30;
+                // Random position around the sticker
+                const x = Math.random() * 80 - 40; // -40 to 40px from center
+                const y = Math.random() * 80 - 40;
                 
                 sparkle.style.left = '50%';
                 sparkle.style.top = '50%';
-                sparkle.style.transform = `translate(${x}px, ${y}px)`;
+                sparkle.style.marginLeft = x + 'px';
+                sparkle.style.marginTop = y + 'px';
                 
                 sticker.appendChild(sparkle);
                 
+                // Remove sparkle after animation
                 setTimeout(() => {
                     if (sparkle.parentNode) {
                         sparkle.parentNode.removeChild(sparkle);
                     }
-                }, 1500);
+                }, 1800);
             }
         }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const stickers = document.querySelectorAll('.frame-sticker');
-            stickers.forEach(sticker => {
-                sticker.addEventListener('mouseenter', createStickerSparkles);
-            });
-        });
     </script>
 </body>
 </html>
