@@ -419,23 +419,32 @@
             transform: scale(1) rotate(360deg);
         }
 
-        .frame-clicked {
-            animation: frameShake 0.6s ease-in-out;
+        .frame-sticker {
+            position: absolute;
+            max-width: 70px;
+            width: auto;
+            height: auto;
+            opacity: 0.9;
         }
 
-        @keyframes frameShake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px) rotate(-1deg); }
-            75% { transform: translateX(5px) rotate(1deg); }
-        }
-        .hidden-sticker.swipe-left {
-            opacity: 1;
-            transform: translate(-300%, -50%) scale(1) rotate(15deg);
+        .sticker-top-left {
+            top: -25px;
+            left: -40px;
         }
 
-        .hidden-sticker.swipe-right {
-            opacity: 1;
-            transform: translate(250%, -50%) scale(1) rotate(-15deg);
+        .sticker-top-right {
+            top: -20px;
+            right: -35px;
+        }
+
+        .sticker-bottom-left {
+            bottom: -30px;
+            left: -45px;
+        }
+
+        .sticker-bottom-right {
+            bottom: -25px;
+            right: -40px;
         }
     </style>
 </head>
@@ -458,7 +467,7 @@
         <div class="room" id="gallery-main">
             <div class="gallery-scroll">
                 <!-- Frame 1: Why Texas Bluebonnets -->
-                <div class="answer-frame" id="first-frame" onclick="triggerStickers()">
+                <div class="answer-frame">
                     <img src="frame2.png" alt="Ornate Frame" class="answer-frame-img">
                     <div class="answer-overlay">
                         <h2 class="answer-title">Why do you want to join Texas Bluebonnets?</h2>
@@ -466,12 +475,8 @@
                             I want to find my family! As a CS major, I am around mostly men, and I experienced what I think is extreme imposter syndrome during my freshman year. A lot of times, I felt like I was more in competition with people I met than making meaningful connections, so I am seeking a genuine community where I can be unapologetically myself :)
                         </p>
                     </div>
-                    <!-- Speech bubble -->
-                    <img src="textbubble1.png" alt="Click me!" class="speech-bubble">
-                    
-                    <!-- Hidden stickers that will animate in -->
-                    <img src="sticker1.png" alt="Sticker" class="hidden-sticker sticker-left" id="sticker-left">
-                    <img src="sticker2.png" alt="Sticker" class="hidden-sticker sticker-right" id="sticker-right">
+                    <img src="sticker1.png" alt="Decorative sticker" class="frame-sticker sticker-top-left">
+                    <img src="sticker2.png" alt="Decorative sticker" class="frame-sticker sticker-top-right">
                 </div>
 
                 <!-- Frame 2: Core Pillar -->
@@ -699,32 +704,6 @@
                 }
             }
         });
-
-        function triggerStickers() {
-            const frame = document.getElementById('first-frame');
-            const leftSticker = document.getElementById('sticker-left');
-            const rightSticker = document.getElementById('sticker-right');
-            
-            // Add shake animation to frame
-            frame.classList.add('frame-clicked');
-            
-            // Remove shake class after animation
-            setTimeout(() => {
-                frame.classList.remove('frame-clicked');
-            }, 600);
-            
-            // Swipe stickers out simultaneously
-            setTimeout(() => {
-                leftSticker.classList.add('swipe-left');
-                rightSticker.classList.add('swipe-right');
-            }, 300);
-            
-            // Reset stickers after 2.5 seconds
-            setTimeout(() => {
-                leftSticker.classList.remove('swipe-left');
-                rightSticker.classList.remove('swipe-right');
-            }, 2800);
-        }
     </script>
 </body>
 </html>
