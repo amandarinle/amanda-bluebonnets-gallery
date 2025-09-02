@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amanda Le - La Vita è Bella Gallery</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Crimson+Text:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc0 100%);
+            color: #2c1810;
+            overflow-x: hidden;
+        }
+        
+        .gallery-container {
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .room {
+            min-height: 100vh;
+            padding: 60px 20px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .room.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .room-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .room-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .room-subtitle {
+            font-size: 1.2rem;
+            color: #6b4423;
+            font-style: italic;
+        }
+        
+        .artwork-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .artwork {
+            background: #fff;
+            border: 20px solid #8b7355;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .artwork:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .artwork-content {
+            padding: 30px;
+            min-height: 250px;
+        }
+        
+        .artwork-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 10px;
+        }
+        
+        .artwork-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #2c1810;
+            text-align: justify;
+        }
+        
+        .placard {
+            background: #f8f6f0;
+            border: 1px solid #d4af37;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #6b4423;
+            font-style: italic;
+            border-radius: 3px;
+        }
+        
+        .navigation {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .nav-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #8b7355;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-dot.active {
+            background: #d4af37;
+            transform: scale(1.3);
+        }
+        
+        .nav-dot:hover {
+            background: #d4af37;
+            transform: scale(1.2);
+        }
+        
+        .nav-tooltip {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #2c1810;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-dot:hover .nav-tooltip {
+            opacity: 1;
+        }
+        
+        .entrance-hall {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .welcome-sign {
+            background: #fff;
+            border: 15px solid #d4af37;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+        
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #8b4513;
+            margin-bottom: 20px;
+        }
+        
+        .credentials {
+            font-size: 1.1rem;
+            color: #6b4423;
+            line-height: 1.5;
+        }
+        
+        .enter-button {
+            background: #8b4513;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .enter-button:hover {
+            background: #a0522d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .decorative-element {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .rose {
+            top: 20%;
+            right: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .sparkles {
+            bottom: 20%;
+            left: 15%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .single-artwork {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .room-title { font-size: 2rem; }
+            .artwork-grid { grid-template-columns: 1fr; }
+            .navigation { display: none; }
+            .welcome-sign { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <!-- Entrance Hall -->
+        <div class="room active entrance-hall" id="entrance">
+            <div class="decorative-element rose">🥀</div>
+            <div class="decorative-element sparkles">✨</div>
+            
+            <div class="welcome-sign">
+                <div class="signature">Amanda Le</div>
+                <div class="credentials">
+                    Computer Science Sophomore<br>
+                    UT Austin • GPA: 3.76<br>
+                    amandaxle2024@gmail.com
+                </div>
+            </div>
+            
+            <div style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #8b4513; margin-bottom: 30px;">
+                "La Vita è Bella"
+            </div>
+            
+            <button class="enter-button" onclick="nextRoom()">Enter the Gallery</button>
+        </div>
+        
+        <!-- Portrait Gallery -->
+        <div class="room" id="portraits">
+            <div class="room-header">
+                <h1 class="room-title">Sala dei Ritratti</h1>
+                <p class="room-subtitle">Portrait Gallery - The Heart of Character</p>
+            </div>
+            
+            <div class="artwork-grid">
+                <div class="artwork">
+                    <div class="artwork-content">
+                        <h2 class="artwork-title">Why Texas Bluebonnets?</h2>
+                        <p class="artwork-text">
+                            I want to find my family! As a CS major, I am around mostly men, and I experienced what I think is extreme imposter syndrome during my freshman year. A lot of times, I felt like I was more in competition with people I met than making meaningful connections, so I am seeking a genuine community where I can be unapologetically myself :)
+                        </p>
+                        <div class="placard">
+                            "The Search for Authentic Connection" - Mixed media on hope, 2024
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="artwork">
+                    <div class="artwork-content">
+                        <h2 class="artwork-title">My Favorite Thing About Myself</h2>
+                        <p class="artwork-text">
+                            I am a very decisive person. I will always know where I want to eat, when I am free and not, and you best believe I will never be late or break my promises.
+                        </p>
+                        <div class="placard">
+                            "Portrait of Reliability" - Oil on determination, 2024
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="artwork">
+                    <div class="artwork-content">
+                        <h2 class="artwork-title">Most Likely To...</h2>
+                        <p class="artwork-text">
+                            I am most likely to cry at any extreme situation (extremely happy, extremely sad, extremely tired, extremely angry, etc.)
+                        </p>
+                        <div class="placard">
+                            "The Spectrum of Emotion" - Watercolor on vulnerability, 2024
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Service Chapel -->
+        <div class="room" id="service">
+            <div class="room-header">
+                <h1 class="room-title">Cappella del Servizio</h1>
+                <p class="room-subtitle">Service Chapel - Acts of Love</p>
+            </div>
+            
+            <div class="single-artwork">
+                <div class="artwork">
+                    <div class="artwork-content">
+                        <h2 class="artwork-title">The Pillar of Service</h2>
+                        <p class="artwork-text">
+                            I value service a lot! I have a local Vietnamese temple near my family home that feeds anyone that joins on Sundays. During my summers, I go to temple every Sunday morning to help out with food preparation, cleaning, and plant care for the nuns that live there. I go with my mom and my sister, so it is not only a way to bond with my family, but also a time completely away from screens and focused on giving back. It became something I looked forward to every weekend as it allowed me to connect with my community while quietly reflecting on my own gratitude for all of the blessings in my life. Because I have so many privileges in my life, such as getting to go to university, being able to move my body, and having access to warm meals, I strongly believe that taking time to help out anybody is essential.
+                        </p>
+                        <div class="placard">
+                            "Sunday Mornings at Temple" - Mixed media on gratitude and community, 2024<br>
+                            <em>Part of the artist's ongoing series on family bonds and spiritual service</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Passion Wing -->
+        <div class="room" id="passions">
+            <div class="room-header">
+                <h1 class="room-title">Ala delle Passioni</h1>
+                <p class="room-subtitle">Passion Wing - What Makes Life Beautiful</p>
+            </div>
+            
+            <div class="artwork-grid">
+                <div class="artwork">
+                    <div class="artwork-content">
+                        <h2 class="artwork-title">Balance & Running</h2>
+                        <p class="artwork-text">
+                            I started running consistently about a year ago, and I believe that it has altered the trajectory on how I view life. It has taught me how to eat properly, get excited to challenge myself, and the importance of consistency. I am most passionate about balance in my life right now. I focus on how I feel and allow myself breaks while also pushing myself when I feel it is needed.
+                        </p>
+                        <div class="placard">
+                            "The Runner's Philosophy" - Movement study, 2024
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="artwork">
+                    <div class="artwork-content">
+                        <h2 class="artwork-title">My Little Pony Manifesto</h2>
+                        <p class="artwork-text">
+                            I could write a novel on My Little Pony lore and how the franchise impacts the world's politics, philosophy, and culture. I am unironically rewatching My Little Pony, and I think rewatching it as a 19 year old is such a refreshing and educative experience. Each of the main six ponies embodies emotions and personality traits that so many people can relate to.
+                        </p>
+                        <div class="placard">
+                            "Unexpected Wisdom" - Pop culture analysis, 2024
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="artwork">
+                    <div class="artwork-content">
+                        <h2 class="artwork-title">K-Pop Immersion</h2>
+                        <p class="artwork-text">
+                            I love kpop! It is not just about the music when it comes to kpop. Whenever I listen to the songs, I visualize the choreography and visuals of the group too! It is such an immersive experience.
+                        </p>
+                        <div class="placard">
+                            "Synesthetic Sound" - Audio-visual experience, 2024
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dreams Corridor -->
+        <div class="room" id="dreams">
+            <div class="room-header">
+                <h1 class="room-title">Corridoio dei Sogni</h1>
+                <p class="room-subtitle">Dreams Corridor - Where Art History Lives</p>
+            </div>
+            
+            <div class="artwork-grid">
+                <div class="artwork">
+                    <div class="artwork-content">
+                        <h2 class="artwork-title">Italian Dreams</h2>
+                        <p class="artwork-text">
+                            Not just because it is the theme, but I would love to be in Italy right now. My favorite subject ever is art history, so I studied a lot about architecture and art from Italy! My dream is to see the Sistine chapel and Michelangelo's works in person!
+                        </p>
+                        <div class="placard">
+                            "Pilgrimage to Beauty" - Wanderlust series, 2024
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="artwork">
+                    <div class="artwork-content">
+                        <h2 class="artwork-title">YOLO Philosophy</h2>
+                        <p class="artwork-text">
+                            YOLO! I always keep in the back of my mind that I am only young once, so I take every opportunity to try new things and have fun!
+                        </p>
+                        <div class="placard">
+                            "Carpe Diem" - Life philosophy, 2024
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="artwork">
+                    <div class="artwork-content">
+                        <h2 class="artwork-title">The Generous Heart</h2>
+                        <p class="artwork-text">
+                            If I got $1000 out of nowhere, I would definitely set some aside to donate to foster care organizations! I really believe that if you receive such a big blessing like that, you should try to give back whatever you can. The rest will go towards my rent or tuition (ty UT)..
+                        </p>
+                        <div class="placard">
+                            "Abundance and Gratitude" - Mixed media on generosity, 2024<br>
+                            <em>🥀</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <div class="navigation">
+        <div class="nav-dot active" onclick="showRoom(0)">
+            <div class="nav-tooltip">Entrance</div>
+        </div>
+        <div class="nav-dot" onclick="showRoom(1)">
+            <div class="nav-tooltip">Portraits</div>
+        </div>
+        <div class="nav-dot" onclick="showRoom(2)">
+            <div class="nav-tooltip">Service</div>
+        </div>
+        <div class="nav-dot" onclick="showRoom(3)">
+            <div class="nav-tooltip">Passions</div>
+        </div>
+        <div class="nav-dot" onclick="showRoom(4)">
+            <div class="nav-tooltip">Dreams</div>
+        </div>
+    </div>
+    
+    <script>
+        let currentRoom = 0;
+        const rooms = document.querySelectorAll('.room');
+        const navDots = document.querySelectorAll('.nav-dot');
+        
+        function showRoom(index) {
+            // Hide current room
+            rooms[currentRoom].classList.remove('active');
+            navDots[currentRoom].classList.remove('active');
+            
+            // Show new room
+            currentRoom = index;
+            setTimeout(() => {
+                rooms[currentRoom].classList.add('active');
+                navDots[currentRoom].classList.add('active');
+            }, 200);
+        }
+        
+        function nextRoom() {
+            if (currentRoom < rooms.length - 1) {
+                showRoom(currentRoom + 1);
+            }
+        }
+        
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add subtle parallax effect to decorative elements
+            let ticking = false;
+            
+            function updateParallax() {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.decorative-element');
+                
+                parallaxElements.forEach(element => {
+                    const speed = 0.5;
+                    const yPos = -(scrolled * speed);
+                    element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                });
+                
+                ticking = false;
+            }
+            
+            function requestTick() {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(updateParallax);
+                }
+            }
+            
+            window.addEventListener('scroll', requestTick);
+            
+            // Add entrance animation
+            setTimeout(() => {
+                const firstRoom = document.querySelector('.room.active');
+                firstRoom.style.opacity = '1';
+                firstRoom.style.transform = 'translateY(0)';
+            }, 500);
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                if (currentRoom < rooms.length - 1) {
+                    showRoom(currentRoom + 1);
+                }
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                if (currentRoom > 0) {
+                    showRoom(currentRoom - 1);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
