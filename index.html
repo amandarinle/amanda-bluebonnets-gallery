@@ -333,13 +333,11 @@
 
         .frame-sticker {
             position: absolute;
-            max-width: 80px;
-            max-height: 80px;
+            max-width: 180px;
             width: auto;
             height: auto;
-            opacity: 0.8;
-            transition: transform 0.3s ease;
-            animation: float 6s ease-in-out infinite;
+            opacity: 0.9;
+            z-index: 10;
         }
 
         .frame-sticker:hover {
@@ -347,39 +345,28 @@
             opacity: 1;
         }
 
-        .sticker-top-left {
-            top: -20px;
-            left: 50px;
-            animation-delay: 0s;
+        .sticker-top-center {
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);  /* Centers it horizontally */
         }
 
-        .sticker-top-right {
-            top: 30px;
-            right: 40px;
-            animation-delay: 2s;
+        .sticker-left-center {
+            left: -60px;
+            top: 50%;
+            transform: translateY(-50%);  /* Centers it vertically */
         }
 
-        .sticker-bottom-left {
-            bottom: 20px;
-            left: 80px;
-            animation-delay: 4s;
+        .sticker-right-center {
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);  /* Centers it vertically */
         }
 
-        .sticker-bottom-right {
-            bottom: -10px;
-            right: 70px;
-            animation-delay: 6s;
-        }
-
-        .speech-bubble {
-            position: absolute;
-            top: -30px;
-            left: -50px;
-            max-width: 120px;
-            cursor: pointer;
-            z-index: 20;
-            transition: transform 0.3s ease;
-            animation: bounce 2s ease-in-out infinite;
+        .sticker-bottom-center {
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);  /* Centers it horizontally */
         }
 
         .speech-bubble:hover {
@@ -412,40 +399,6 @@
             top: 120px;
             right: -80px;
         }
-
-        /* Animation classes */
-        .hidden-sticker.animate-in {
-            opacity: 1;
-            transform: scale(1) rotate(360deg);
-        }
-
-        .frame-sticker {
-            position: absolute;
-            max-width: 70px;
-            width: auto;
-            height: auto;
-            opacity: 0.9;
-        }
-
-        .sticker-top-left {
-            top: -25px;
-            left: -40px;
-        }
-
-        .sticker-top-right {
-            top: -20px;
-            right: -35px;
-        }
-
-        .sticker-bottom-left {
-            bottom: -30px;
-            left: -45px;
-        }
-
-        .sticker-bottom-right {
-            bottom: -25px;
-            right: -40px;
-        }
     </style>
 </head>
 <body>
@@ -475,8 +428,8 @@
                             I want to find my family! As a CS major, I am around mostly men, and I experienced what I think is extreme imposter syndrome during my freshman year. A lot of times, I felt like I was more in competition with people I met than making meaningful connections, so I am seeking a genuine community where I can be unapologetically myself :)
                         </p>
                     </div>
-                    <img src="sticker1.png" alt="Decorative sticker" class="frame-sticker sticker-top-left">
-                    <img src="sticker2.png" alt="Decorative sticker" class="frame-sticker sticker-top-right">
+                    <img src="sticker1.png" alt="Decorative sticker" class="frame-sticker sticker-top-center">
+                    <img src="sticker2.png" alt="Decorative sticker" class="frame-sticker sticker-left-center">
                 </div>
 
                 <!-- Frame 2: Core Pillar -->
