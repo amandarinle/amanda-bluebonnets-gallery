@@ -234,12 +234,6 @@
             transition: all 0.3s ease;
         }
         
-        .enter-button:hover {
-            background: #a0522d;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
         .decorative-element {
             position: absolute;
             font-size: 2rem;
@@ -364,35 +358,31 @@
             transform: translateX(-50%);  /* Centers it horizontally */
         }
 
-        .speech-bubble:hover {
+        .sticker-hover {
             transform: scale(1.1);
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Hidden stickers that will animate in */
-        .hidden-sticker {
+        .sparkle {
             position: absolute;
-            max-width: 60px;
+            font-size: 1.5rem;
             opacity: 0;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            transition: all 1.0s ease-out;
-            z-index: 15;
+            pointer-events: none;
+            animation: sparkleFloat 2s ease-out forwards;
         }
 
-        .sticker-left {
-            top: 100px;
-            left: -80px;
-        }
-
-        .sticker-right {
-            top: 120px;
-            right: -80px;
+        @keyframes sparkleFloat {
+            0% {
+                opacity: 1;
+                transform: scale(0.5) rotate(0deg);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.2) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.8) rotate(360deg) translateY(-50px);
+            }
         }
     </style>
 </head>
@@ -400,7 +390,7 @@
     <div class="gallery-container">
         <!-- Entrance Hall -->
         <div class="room active entrance-hall" id="entrance">
-            <div class="frame-container">
+            <div class="frame-container" onclick="createSparkles(event)">
                 <img src="frame.png" alt="Ornate Frame" class="ornate-frame-img">
                 <div class="frame-overlay">
                     <div class="welcome-text">Welcome to Amanda's Gallery</div>
@@ -408,7 +398,7 @@
                 </div>
             </div>
             
-            <button class="enter-button" onclick="nextRoom()">Enter the Gallery</button>
+            <button class="enter-button">Scroll to walk through</button>
         </div>
         
         <!-- Gallery Main View -->
@@ -596,13 +586,7 @@
                 window.scrollTo(0, 0);
             }, 200);
         }
-        
-        function nextRoom() {
-            if (currentRoom < rooms.length - 1) {
-                showRoom(currentRoom + 1);
-            }
-        }
-        
+
         // Add some interactive elements
         document.addEventListener('DOMContentLoaded', function() {
             // Add subtle parallax effect to decorative elements
@@ -652,6 +636,34 @@
                 }
             }
         });
+
+        function createSparkles(event) {
+            const sparkleEmojis = ['✨', '💫', '⭐', '🌟', '💎'];
+            const container = event.currentTarget;
+            
+            // Create 8-12 sparkles around the click point
+            for (let i = 0; i < Math.random() * 5 + 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.textContent = sparkleEmojis[Math.floor(Math.random() * sparkleEmojis.length)];
+                
+                // Position sparkles randomly around the frame
+                const x = Math.random() * container.offsetWidth;
+                const y = Math.random() * container.offsetHeight;
+                
+                sparkle.style.left = x + 'px';
+                sparkle.style.top = y + 'px';
+                
+                container.appendChild(sparkle);
+                
+                // Remove sparkle after animation
+                setTimeout(() => {
+                    if (sparkle.parentNode) {
+                        sparkle.parentNode.removeChild(sparkle);
+                    }
+                }, 2000);
+            }
+        }
     </script>
 </body>
 </html>
