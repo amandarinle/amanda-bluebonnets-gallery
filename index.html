@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amanda Le - La Vita è Bella Gallery</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Crimson+Text:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Crimson+Text:wght@400;600&family=Dancing+Script:wght@400;700&display=swap');
         
         * {
             margin: 0;
@@ -174,27 +174,52 @@
             align-items: center;
         }
         
-        .welcome-sign {
-            background: #fff;
-            border: 15px solid #d4af37;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            max-width: 600px;
-            margin-bottom: 40px;
+        .frame-container {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto 40px;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+            transition: transform 0.3s ease;
         }
         
-        .signature {
+        .frame-container:hover {
+            transform: scale(1.05);
+        }
+        
+        .ornate-frame-img {
+            max-width: 500px;
+            max-height: 600px;
+            width: auto;
+            height: auto;
+            display: block;
+        }
+        
+        .frame-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            width: 60%;
+        }
+        
+        .welcome-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c1810;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .subtitle-text {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: #8b4513;
-            margin-bottom: 20px;
-        }
-        
-        .credentials {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #6b4423;
-            line-height: 1.5;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
         }
         
         .enter-button {
@@ -259,17 +284,12 @@
             <div class="decorative-element rose">🥀</div>
             <div class="decorative-element sparkles">✨</div>
             
-            <div class="welcome-sign">
-                <div class="signature">Amanda Le</div>
-                <div class="credentials">
-                    Computer Science Sophomore<br>
-                    UT Austin • GPA: 3.76<br>
-                    amandaxle2024@gmail.com
+            <div class="frame-container">
+                <img src="frame.png" alt="Ornate Frame" class="ornate-frame-img">
+                <div class="frame-overlay">
+                    <div class="welcome-text">Welcome to Amanda's Gallery</div>
+                    <div class="subtitle-text">"La Vita è Bella"</div>
                 </div>
-            </div>
-            
-            <div style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #8b4513; margin-bottom: 30px;">
-                "La Vita è Bella"
             </div>
             
             <button class="enter-button" onclick="nextRoom()">Enter the Gallery</button>
