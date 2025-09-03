@@ -554,6 +554,30 @@
             }
         }
 
+        .dolce-emoji {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            animation: dolceEmojiFloat 2.5s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes dolceEmojiFloat {
+            0% {
+                opacity: 1;
+                transform: scale(0.5) rotate(0deg);
+            }
+            50% {
+                opacity: 0.9;
+                transform: scale(1.3) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.8) rotate(360deg) translateY(-60px);
+            }
+        }
+
         .triangle-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -733,7 +757,7 @@
         </div>
         <div class="six-frame-grid">
             <!-- Frame 1 -->
-            <div class="dolce-frame">
+            <div class="dolce-frame" onclick = "createDolceEmojis(event)" data-theme="decisive">
                 <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
                 <div class="dolce-overlay">
                     <h2 class="dolce-title">What is your favorite thing about yourself?</h2>
@@ -743,7 +767,7 @@
                 </div>
             </div>
             <!-- Frame 2 -->
-            <div class="dolce-frame">
+            <div class="dolce-frame" onclick="createDolceEmojis(event)" data-theme="yolo">
                 <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
                 <div class="dolce-overlay">
                     <h2 class="dolce-title">What's the best piece of advice you've ever received?</h2>
@@ -753,7 +777,7 @@
                 </div>
             </div>
             <!-- Frame 3 -->
-            <div class="dolce-frame">
+            <div class="dolce-frame" onclick="createDolceEmojis(event)" data-theme="italy">
                 <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
                 <div class="dolce-overlay">
                     <h2 class="dolce-title">If you could travel anywhere, where would you go?</h2>
@@ -763,7 +787,7 @@
                 </div>
             </div>
             <!-- Frame 4 -->
-            <div class="dolce-frame">
+            <div class="dolce-frame" onclick="createDolceEmojis(event)" data-theme="kpop">
                 <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
                 <div class="dolce-overlay">
                     <h2 class="dolce-title">What kind of music do you listen to when you're in a great mood?</h2>
@@ -773,7 +797,7 @@
                 </div>
             </div>
             <!-- Frame 5 -->
-            <div class="dolce-frame">
+            <div class="dolce-frame" onclick="createDolceEmojis(event)" data-theme="generous">
                 <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
                 <div class="dolce-overlay">
                     <h2 class="dolce-title">If you had $1000, what would you spend it on?</h2>
@@ -783,7 +807,7 @@
                 </div>
             </div>
             <!-- Frame 6 -->
-            <div class="dolce-frame">
+            <div class="dolce-frame" onclick="createDolceEmojis(event)" data-theme="rose">
                 <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
                 <div class="dolce-overlay">
                     <h2 class="dolce-title">What is your favorite emoji?</h2>
@@ -973,6 +997,46 @@
                         sparkle.parentNode.removeChild(sparkle);
                     }
                 }, 1800);
+            }
+        }
+
+        function createDolceEmojis(event) {
+            const frame = event.currentTarget;
+            const theme = frame.dataset.theme;
+            
+            // Define emoji sets for each theme
+            const emojiSets = {
+                decisive: ['⏰', '✅', '🎯', '💪', '🔥'],
+                yolo: ['🎉', '🌟', '🚀', '🎊', '✨'],
+                italy: ['🇮🇹', '🍝', '🎨', '🏛️', '🍷'],
+                kpop: ['💜', '🎵', '💃', '🎤', '🌈'],
+                generous: ['💝', '❤️', '🤝', '💖', '🌺'],
+                rose: ['🥀', '🌹', '💔', '🎭', '✨']
+            };
+            
+            const emojis = emojiSets[theme] || ['✨', '💫', '⭐'];
+            
+            // Create 6-8 themed emojis around the frame
+            for (let i = 0; i < Math.random() * 3 + 6; i++) {
+                const emoji = document.createElement('div');
+                emoji.className = 'dolce-emoji';
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                
+                // Random position around the frame
+                const x = Math.random() * frame.offsetWidth;
+                const y = Math.random() * frame.offsetHeight;
+                
+                emoji.style.left = x + 'px';
+                emoji.style.top = y + 'px';
+                
+                frame.appendChild(emoji);
+                
+                // Remove emoji after animation
+                setTimeout(() => {
+                    if (emoji.parentNode) {
+                        emoji.parentNode.removeChild(emoji);
+                    }
+                }, 2500);
             }
         }
     </script>
