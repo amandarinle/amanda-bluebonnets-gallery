@@ -372,7 +372,7 @@
         .sticker-mlp {
             right: 70px;
             bottom: -30px;
-            width: 600px;
+            width: 700px;
         }
 
         /* Sparkles for stickers */
@@ -636,6 +636,26 @@
             width: 85%;
             text-align: center;
             padding: 25px;
+            transition: all 0.5s ease;
+        }
+
+        .whimsical-background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            z-index: -1;
+            border-radius: 50px; /* Match heart shape if needed */
+        }
+
+        .whimsical-background-image.show {
+            opacity: 0.15; /* Low opacity so text remains readable */
         }
 
         .whimsical-title {
@@ -828,9 +848,10 @@
             
             <div class="triangle-grid">
                 <!-- Top frame -->
-                <div class="whimsical-frame">
+                <div class="whimsical-frame" onclick="showWhimsicalBackground(event, 'crying')" data-bg="crying">
                     <img src="frame5.png" alt="Whimsical Frame" class="whimsical-frame-img">
                     <div class="whimsical-overlay">
+                        <div class ="whimsical-background-image"></div>
                         <h2 class="whimsical-title">Most likely to...</h2>
                         <p class="whimsical-text">
                             I am most likely to cry at any extreme situation (extremely happy, extremely sad, extremely tired, extremely angry, etc.)
@@ -839,9 +860,10 @@
                 </div>
                 
                 <!-- Bottom left -->
-                <div class="whimsical-frame">
+                <div class="whimsical-frame" onclick="showWhimsicalBackground(event, 'eagle')" data-bg="eagle">
                     <img src="frame5.png" alt="Whimsical Frame" class="whimsical-frame-img">
                     <div class="whimsical-overlay">
+                        <div class ="whimsical-background-image"></div>
                         <h2 class="whimsical-title">If all animals were the same size...</h2>
                         <p class="whimsical-text">
                             I think a bird like a bald eagle would definitely win. They will still have wings and the ability to fly so they'll be able to dodge attacks while attacking from above.
@@ -850,9 +872,10 @@
                 </div>
                 
                 <!-- Bottom center -->
-                <div class="whimsical-frame">
+                <div class="whimsical-frame" onclick="showWhimsicalBackground(event, 'victorian')" data-bg="victorian">
                     <img src="frame5.png" alt="Whimsical Frame" class="whimsical-frame-img">
                     <div class="whimsical-overlay">
+                        <div class ="whimsical-background-image"></div>
                         <h2 class="whimsical-title">Victorian Era item?</h2>
                         <p class="whimsical-text">
                             I would probably show them ChatGPT. It may accelerate the brain rot rate of the world though...
@@ -861,9 +884,10 @@
                 </div>
                 
                 <!-- Bottom right -->
-                <div class="whimsical-frame">
+                <div class="whimsical-frame" onclick="showWhimsicalBackground(event, 'death-meal')" data-bg="death-meal">
                     <img src="frame5.png" alt="Whimsical Frame" class="whimsical-frame-img">
                     <div class="whimsical-overlay">
+                        <div class ="whimsical-background-image"></div>
                         <h2 class="whimsical-title">Death row meal?</h2>
                         <p class="whimsical-text">
                             I would have this pork dish from a Chinese restaurant in Canada that I literally saw heaven when I had it that one and only time. I would also request coconut ice cream from a certain resort in Cozumel.
@@ -1038,6 +1062,32 @@
                         emoji.parentNode.removeChild(emoji);
                     }
                 }, 2500);
+            }
+        }
+
+        function showWhimsicalBackground(event, theme) {
+            const frame = event.currentTarget;
+            const backgroundDiv = frame.querySelector('.whimsical-background-image');
+            
+            // Image file mappings
+            const backgroundImages = {
+                crying: 'crying.jpeg',
+                eagle: 'eagle.jpeg', 
+                victorian: 'victorian.jpeg',
+                food: 'food.jpg'
+            };
+            
+            // Set the background image
+            backgroundDiv.style.backgroundImage = `url('${backgroundImages[theme]}')`;
+            
+            // Toggle the show class
+            backgroundDiv.classList.toggle('show');
+            
+            // Optional: Hide after 3 seconds
+            if (backgroundDiv.classList.contains('show')) {
+                setTimeout(() => {
+                    backgroundDiv.classList.remove('show');
+                }, 3000);
             }
         }
     </script>
