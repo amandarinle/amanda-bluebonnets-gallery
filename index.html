@@ -554,6 +554,95 @@
             }
         }
 
+        .triangle-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .triangle-grid .whimsical-frame:nth-child(1) {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .triangle-grid .whimsical-frame:nth-child(2) {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .triangle-grid .whimsical-frame:nth-child(3) {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        .triangle-grid .whimsical-frame:nth-child(4) {
+            grid-column: 4;
+            grid-row: 2;
+        }
+
+        .whimsical-frame {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .whimsical-frame:hover {
+            transform: translateY(-5px);
+        }
+
+        .whimsical-frame-img {
+            max-width: 350px;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .whimsical-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65%;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .whimsical-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+        }
+
+        .whimsical-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            color: #2c1810;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+            text-align: justify;
+        }
+
+        @media (max-width: 768px) {
+            .triangle-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, 1fr);
+            }
+            
+            .triangle-grid .whimsical-frame {
+                grid-column: 1 !important;
+                grid-row: auto !important;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -702,6 +791,61 @@
                     </p>
                 </div>
             </div>
+        </div>
+
+        <!-- Whimsical Wanderings Section -->
+        <div class="room" id="whimsical-wanderings">
+            <div class="room-header">
+                <h1 class="room-title">Vagabondaggi Fantasiosi</h1>
+                <p class="room-subtitle">Whimsical Wanderings - Playful Hypotheticals</p>
+            </div>
+            
+            <div class="triangle-grid">
+                <!-- Top frame -->
+                <div class="whimsical-frame">
+                    <img src="frame5.png" alt="Whimsical Frame" class="whimsical-frame-img">
+                    <div class="whimsical-overlay">
+                        <h2 class="whimsical-title">Most likely to...</h2>
+                        <p class="whimsical-text">
+                            I am most likely to cry at any extreme situation (extremely happy, extremely sad, extremely tired, extremely angry, etc.)
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Bottom left -->
+                <div class="whimsical-frame">
+                    <img src="frame5.png" alt="Whimsical Frame" class="whimsical-frame-img">
+                    <div class="whimsical-overlay">
+                        <h2 class="whimsical-title">Animals same size fight?</h2>
+                        <p class="whimsical-text">
+                            I think a bird like a bald eagle would definitely win. They will still have wings and the ability to fly so they'll be able to dodge attacks while attacking from above.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Bottom center -->
+                <div class="whimsical-frame">
+                    <img src="frame5.png" alt="Whimsical Frame" class="whimsical-frame-img">
+                    <div class="whimsical-overlay">
+                        <h2 class="whimsical-title">Victorian Era item?</h2>
+                        <p class="whimsical-text">
+                            I would probably show them ChatGPT. It may accelerate the brain rot rate of the world though...
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Bottom right -->
+                <div class="whimsical-frame">
+                    <img src="frame6.png" alt="Whimsical Frame" class="whimsical-frame-img">
+                    <div class="whimsical-overlay">
+                        <h2 class="whimsical-title">Death row meal?</h2>
+                        <p class="whimsical-text">
+                            I would have this pork dish from a Chinese restaurant in Canada that I literally saw heaven when I had it that one and only time. I would also request coconut ice cream from a certain resort in Cozumel.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     <script>
         let currentRoom = 0;
         const rooms = document.querySelectorAll('.room');
