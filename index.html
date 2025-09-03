@@ -358,6 +358,12 @@
             rotate: 15deg;
         }
 
+        .sticker-entrance {
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);  /* Centers it vertically */
+        }
+
         /* Sparkles for stickers */
         .sticker-sparkle {
             position: absolute;
@@ -475,7 +481,7 @@
                     <div class="welcome-text">Welcome to Amanda's Gallery</div>
                     <div class="subtitle-text">"La Vita è Bella"</div>
                 </div>
-                <img src="click.png" alt="Decorative sticker" class="frame-sticker sticker-left-center" onclick="createSparkles">
+                <img src="click.png" alt="Decorative sticker" class="frame-sticker sticker-entrance" onclick="createSparkles">
             </div>
         </div>
         
