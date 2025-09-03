@@ -365,14 +365,14 @@
         }
 
         .sticker-gym {
-            left: -35px;
+            left: -30px;
             top: -5px;
         }
 
         .sticker-mlp {
             right: 70px;
             bottom: -30px;
-            width: 500px;
+            width: 600px;
         }
 
         /* Sparkles for stickers */
@@ -480,6 +480,54 @@
                 gap: 60px;
             }
         }
+
+        .dolce-frame {
+            position: relative;
+            margin-bottom: 60px;
+            display: flex;
+            justify-content: center;
+            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .dolce-frame:hover {
+            transform: translateY(-5px);
+        }
+
+        .dolce-frame-img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .dolce-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .dolce-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 12px;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+        }
+
+        .dolce-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #2c1810;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.6);
+            text-align: justify;
+        }
     </style>
 </head>
 <body>
@@ -560,53 +608,74 @@
             </div>
         </div>
         
-        <!-- Dreams Corridor -->
-        <div class="room" id="dreams">
+        <!-- La Dolce Vita Section -->
+        <div class="room" id="la-dolce-vita">
             <div class="room-header">
-                <h1 class="room-title">Corridoio dei Sogni</h1>
-                <p class="room-subtitle">Dreams Corridor - Where Art History Lives</p>
-            </div>
-            
-            <div class="artwork-grid">
-                <div class="artwork">
-                    <div class="artwork-content">
-                        <h2 class="artwork-title">Italian Dreams</h2>
-                        <p class="artwork-text">
-                            Not just because it is the theme, but I would love to be in Italy right now. My favorite subject ever is art history, so I studied a lot about architecture and art from Italy! My dream is to see the Sistine chapel and Michelangelo's works in person!
-                        </p>
-                        <div class="placard">
-                            "Pilgrimage to Beauty" - Wanderlust series, 2024
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="artwork">
-                    <div class="artwork-content">
-                        <h2 class="artwork-title">YOLO Philosophy</h2>
-                        <p class="artwork-text">
-                            YOLO! I always keep in the back of my mind that I am only young once, so I take every opportunity to try new things and have fun!
-                        </p>
-                        <div class="placard">
-                            "Carpe Diem" - Life philosophy, 2024
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="artwork">
-                    <div class="artwork-content">
-                        <h2 class="artwork-title">The Generous Heart</h2>
-                        <p class="artwork-text">
-                            If I got $1000 out of nowhere, I would definitely set some aside to donate to foster care organizations! I really believe that if you receive such a big blessing like that, you should try to give back whatever you can. The rest will go towards my rent or tuition (ty UT)..
-                        </p>
-                        <div class="placard">
-                            "Abundance and Gratitude" - Mixed media on generosity, 2024<br>
-                            <em>🥀</em>
-                        </div>
-                    </div>
-                </div>
+                <h1 class="room-title">La Dolce Vita</h1>
+                <p class="room-subtitle">The Sweet Life - Values & Character</p>
             </div>
         </div>
-    </div>
+        <div class="six-frame-grid">
+            <!-- Frame 1 -->
+            <div class="dolce-frame">
+                <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
+                <div class="dolce-overlay">
+                    <h2 class="dolce-title">What is your favorite thing about yourself?</h2>
+                    <p class="dolce-text">
+                        I am a very decisive person. I will always know where I want to eat, when I am free and not, and you best believe I will never be late or break my promises.
+                    </p>
+                </div>
+            </div>
+            <!-- Frame 2 -->
+            <div class="dolce-frame">
+                <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
+                <div class="dolce-overlay">
+                    <h2 class="dolce-title">What's the best piece of advice you've ever received?</h2>
+                    <p class="dolce-text">
+                        YOLO! I always keep in the back of my mind that I am only young once, so I take every opportunity to try new things and have fun!
+                    </p>
+                </div>
+            </div>
+            <!-- Frame 3 -->
+            <div class="dolce-frame">
+                <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
+                <div class="dolce-overlay">
+                    <h2 class="dolce-title">If you could travel anywhere right now, where would you go?</h2>
+                    <p class="dolce-text">
+                        Not just because it is the theme, but I would love to be in Italy right now. My favorite subject ever is art history, so I studied a lot about architecture and art from Italy! My dream is to see the Sistine chapel and Michealangelo’s works in person!
+                    </p>
+                </div>
+            </div>
+            <!-- Frame 4 -->
+            <div class="dolce-frame">
+                <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
+                <div class="dolce-overlay">
+                    <h2 class="dolce-title">What kind of music do you listen to when you're in a great mood?</h2>
+                    <p class="dolce-text">
+                        I love kpop! It is not just about the music when it comes to kpop. Whenever I listen to the songs, I visualize the choreography and visuals of the group too! It is such an immersive experience.
+                    </p>
+                </div>
+            </div>
+            <!-- Frame 5 -->
+            <div class="dolce-frame">
+                <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
+                <div class="dolce-overlay">
+                    <h2 class="dolce-title">If you had 1000 dollars, what would you spend it on?</h2>
+                    <p class="dolce-text">
+                        If I got that money out of no where, I would definitely set some aside to donate to foster care organizations! I really believe that if you receive such a big blessing like that, you should try to give back whatever you can. The rest will go towards my rent or tuition (ty UT)..
+                    </p>
+                </div>
+            </div>
+            <!-- Frame 6 -->
+            <div class="dolce-frame">
+                <img src="frame4.png" alt="Dolce Vita Frame" class="dolce-frame-img">
+                <div class="dolce-overlay">
+                    <h2 class="dolce-title">IWhat is your favorite emoji?</h2>
+                    <p class="dolce-text">
+                        I LOVE the wilting rose emoji. I spam it for dramatic effect.
+                    </p>
+                </div>
+            </div>
     <script>
         let currentRoom = 0;
         const rooms = document.querySelectorAll('.room');
