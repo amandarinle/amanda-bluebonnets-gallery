@@ -772,6 +772,65 @@
             opacity: 1;
         }
 
+        .signature-hall {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .signature-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            width: 70%;
+        }
+
+        .signature-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #8b4513;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 0.5s forwards;
+        }
+
+        .signature-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #6b4423;
+            font-style: italic;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 1.5s forwards;
+        }
+
+        .signature-date {
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            color: #8b4513;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 2.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -986,13 +1045,9 @@
                 <div class="frame-container">
                     <img src="frame.png" alt="Signature Frame" class="ornate-frame-img">
                     <div class="signature-overlay">
-                        <div class="signature-overlay">
-                            <div class="signature-name">Amanda Le</div>
-                            <p class="signature-text">Thank you for visiting my gallery</p>
-                            <p class="signature-date">"La Vita è Bella" - 2024</p>
-                        </div>
+                        <div class="signature-name">Amanda Le</div>
                         <p class="signature-text">Thank you for visiting my gallery</p>
-                        <p class="signature-date">"La Vita è Bella" - Amanda Le, 2024</p>
+                        <p class="signature-date">"La Vita è Bella" - 2024</p>
                     </div>
                 </div>
             </div>
