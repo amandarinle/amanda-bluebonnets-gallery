@@ -706,7 +706,10 @@
             transform: translate(-50%, -50%);
             text-align: center;
             z-index: 10;
-            width: 70%;
+            width: 80%;  /* Increased from 70% */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .signature-svg {
@@ -729,9 +732,10 @@
             font-size: 1.2rem;
             color: #6b4423;
             font-style: italic;
-            margin-bottom: 10px;
+            margin: 20px 0 10px 0;  /* Added top/bottom margins */
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            text-align: center;
         }
 
         .signature-text.show {
@@ -744,6 +748,8 @@
             color: #8b4513;
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            text-align: center;
+            margin-top: 10px;
         }
 
         .signature-date.show {
@@ -964,14 +970,17 @@
                 <div class="frame-container">
                     <img src="frame.png" alt="Signature Frame" class="ornate-frame-img">
                     <div class="signature-overlay">
-                        <svg class="signature-svg" viewBox="0 0 400 150" onclick="animateSignature()">
-                            <!-- Signature path for "Amanda Le" -->
-                            <path id="signature-path" d="M50,80 Q80,50 120,80 T180,70 M180,70 Q200,50 220,80 T260,75 M280,60 L280,90 M300,60 Q320,80 340,60" 
+                        <svg class="signature-svg" viewBox="0 0 300 80" onclick="animateSignature()">
+                            <!-- Amanda -->
+                            <path id="signature-path" d="M20,50 Q25,30 35,40 Q45,50 55,35 Q60,45 70,40 Q75,35 85,45 Q90,55 100,45 Q105,40 115,50
+                                    M130,35 L130,55 Q135,30 145,45 Q150,55 160,45 Q165,35 175,50 Q180,60 190,45
+                                    M210,40 Q215,25 225,35 Q235,45 245,30 Q250,40 260,35 Q265,30 275,40"
                                 stroke="#8b4513" 
-                                stroke-width="3" 
+                                stroke-width="2" 
                                 fill="none" 
-                                stroke-dasharray="1000" 
-                                stroke-dashoffset="1000"/>
+                                stroke-linecap="round"
+                                stroke-dasharray="800" 
+                                stroke-dashoffset="800"/>
                         </svg>
                         <p class="signature-text">Thank you for visiting my gallery</p>
                         <p class="signature-date">"La Vita è Bella" - Amanda Le, 2024</p>
