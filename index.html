@@ -689,6 +689,67 @@
             }
         }
 
+        .signature-hall {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .signature-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            width: 70%;
+        }
+
+        .signature-svg {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        #signature-path {
+            transition: stroke-dashoffset 3s ease-in-out;
+        }
+
+        #signature-path.animate {
+            stroke-dashoffset: 0;
+        }
+
+        .signature-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #6b4423;
+            font-style: italic;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .signature-text.show {
+            opacity: 1;
+        }
+
+        .signature-date {
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            color: #8b4513;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .signature-date.show {
+            opacity: 1;
+        }
+
     </style>
 </head>
 <body>
@@ -897,6 +958,27 @@
                 </div>
             </div>
         </div>
+        <!-- Signature Section -->
+        <div class="room" id="signature-section">
+            <div class="signature-hall">
+                <div class="frame-container">
+                    <img src="frame.png" alt="Signature Frame" class="ornate-frame-img">
+                    <div class="signature-overlay">
+                        <svg class="signature-svg" viewBox="0 0 400 150" onclick="animateSignature()">
+                            <!-- Signature path for "Amanda Le" -->
+                            <path id="signature-path" d="M50,80 Q80,50 120,80 T180,70 M180,70 Q200,50 220,80 T260,75 M280,60 L280,90 M300,60 Q320,80 340,60" 
+                                stroke="#8b4513" 
+                                stroke-width="3" 
+                                fill="none" 
+                                stroke-dasharray="1000" 
+                                stroke-dashoffset="1000"/>
+                        </svg>
+                        <p class="signature-text">Thank you for visiting my gallery</p>
+                        <p class="signature-date">"La Vita è Bella" - Amanda Le, 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     <script>
         let currentRoom = 0;
         const rooms = document.querySelectorAll('.room');
@@ -1091,6 +1173,48 @@
                 }, 3000);
             }
         }
+
+        function animateSignature() {
+            const path = document.getElementById('signature-path');
+            const text = document.querySelector('.signature-text');
+            const date = document.querySelector('.signature-date');
+            
+            // Reset animation
+            path.classList.remove('animate');
+            text.classList.remove('show');
+            date.classList.remove('show');
+            
+            // Start signature animation
+            setTimeout(() => {
+                path.classList.add('animate');
+            }, 100);
+            
+            // Show text after signature completes
+            setTimeout(() => {
+                text.classList.add('show');
+            }, 2000);
+            
+            // Show date last
+            setTimeout(() => {
+                date.classList.add('show');
+            }, 2500);
+        }
+
+        // Auto-animate when section comes into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.target.id === 'signature-section') {
+                        setTimeout(animateSignature, 500);
+                    }
+                });
+            });
+            
+            const signatureSection = document.getElementById('signature-section');
+            if (signatureSection) {
+                observer.observe(signatureSection);
+            }
+        });
     </script>
 </body>
 </html>
