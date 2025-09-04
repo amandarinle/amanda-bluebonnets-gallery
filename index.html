@@ -756,6 +756,22 @@
             opacity: 1;
         }
 
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+        .signature-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #8b4513;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            margin: 10px 0;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+        }
+
+        .signature-name.show {
+            opacity: 1;
+        }
+
     </style>
 </head>
 <body>
@@ -970,18 +986,11 @@
                 <div class="frame-container">
                     <img src="frame.png" alt="Signature Frame" class="ornate-frame-img">
                     <div class="signature-overlay">
-                        <svg class="signature-svg" viewBox="0 0 300 80" onclick="animateSignature()">
-                            <!-- Amanda -->
-                            <path id="signature-path" d="M20,50 Q25,30 35,40 Q45,50 55,35 Q60,45 70,40 Q75,35 85,45 Q90,55 100,45 Q105,40 115,50
-                                    M130,35 L130,55 Q135,30 145,45 Q150,55 160,45 Q165,35 175,50 Q180,60 190,45
-                                    M210,40 Q215,25 225,35 Q235,45 245,30 Q250,40 260,35 Q265,30 275,40"
-                                stroke="#8b4513" 
-                                stroke-width="2" 
-                                fill="none" 
-                                stroke-linecap="round"
-                                stroke-dasharray="800" 
-                                stroke-dashoffset="800"/>
-                        </svg>
+                        <div class="signature-overlay">
+                            <div class="signature-name">Amanda Le</div>
+                            <p class="signature-text">Thank you for visiting my gallery</p>
+                            <p class="signature-date">"La Vita è Bella" - 2024</p>
+                        </div>
                         <p class="signature-text">Thank you for visiting my gallery</p>
                         <p class="signature-date">"La Vita è Bella" - Amanda Le, 2024</p>
                     </div>
